@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>To-Do App</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="login">
+        <form class="login-form">
+          <h2>Username</h2>
+          <input class="user-name" type="text" required autofocus />
+          <button class="login-btn" type="submit">Continue</button>
+        </form>
+      </div>
+
+      <div class="container task-container">
+        <h1 class="header">To do <span class="uname"></span></h1>
+        <button class="add-task-btn"><h2>Add New Task</h2></button>
+        <div class="todo-list">
+          <ul class="todo-list-items"></ul>
+        </div>
+      </div>
+
+      <div class="modal-overlay task-container">
+        <div class="add-task-container">
+          <form class="add-task-form">
+            <div class="add-task-input-group title">
+              <label> <h2>Title</h2> </label>
+              <input class="add-task-input" type="text" required autofocus />
+            </div>
+            <div class="add-task-input-group date">
+              <label> <h2>Date</h2> </label>
+              <input class="add-task-date" type="date" required autofocus />
+            </div>
+            <div class="add-task-buttons">
+              <button class="add-task-cancel">Cancel</button>
+              <button class="add-task-save" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

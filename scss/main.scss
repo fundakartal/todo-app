@@ -1,0 +1,327 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// font-family
+$font-family: 'Arial', sans-serif;
+// colors
+$color-black: #272727;
+$color-white: #f8f8f8;
+$color-purple: #800080;
+$color-red: #b70000;
+$coplor-grey: #7e7a7a;
+$color-back: #d0cad9;
+$color-background: #d9d6df;
+
+@mixin mq($width: 'small') {
+  @if ($width == 'small') {
+    // Small devices
+    @media (min-width: 576px) {
+      @content;
+    }
+  } @else if ($width == 'tablet') {
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if($width == 'desktop') {
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if($width == 'large') {
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+body {
+  font-family: $font-family;
+  background-color: $color-background;
+  :focus {
+    outline-color: $color-purple;
+  }
+}
+h1 {
+  @include mq('tablet') {
+    font-size: 36px;
+  }
+}
+h2 {
+  @include mq('tablet') {
+    line-height: 28px;
+    font-size: 24px;
+  }
+}
+.container {
+  padding: 30px 20px;
+  @include mq('tablet') {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 56px;
+    position: relative;
+  }
+}
+.task-container {
+  display: none;
+  flex-direction: column;
+}
+.uname {
+  color: transparent;
+  font-size: 0px;
+}
+.done {
+  transition: color 0.3s ease-in-out;
+  color: $coplor-grey;
+}
+.date-header {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  margin-bottom: 18px;
+  margin-top: 42px;
+}
+button {
+  width: 44px;
+  height: 44px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &.empty {
+    background-image: url(../img/done/empty.svg);
+  }
+  &.done {
+    background-image: url(../img/done/full.svg);
+  }
+  &.edit {
+    background-image: url(../img/edit.svg);
+  }
+  &.save {
+    background-image: url(../img/done/bold.svg);
+  }
+  &.delete {
+    background-image: url(../img/delete/passive.svg);
+    transition: background-image 0.3s ease-in-out;
+    &:hover {
+      background-image: url(../img/delete/hover.svg);
+    }
+  }
+  &.add-task-btn {
+    border-radius: 4px;
+    padding: 8px, 42px;
+    width: 90%;
+    max-width: 256px;
+    height: 44px;
+    margin-top: 30px;
+    box-shadow: 4px 4px 16px rgba(39, 39, 39, 0.25),
+      inset -4px -4px 16px rgba(39, 39, 39, 0.1),
+      inset 4px 4px 16px rgba(39, 39, 39, 0.07);
+    background-color: $color-white;
+    cursor: pointer;
+    @include mq('large') {
+      position: absolute;
+      top: 137px;
+      right: 56px;
+    }
+  }
+}
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 400px;
+    height: 204px;
+    input {
+      width: 80%;
+      height: 44px;
+      background-color: $color-back;
+      padding: 10px;
+      border: 1px solid $color-black;
+      margin-top: 24px;
+      margin-bottom: 64px;
+      font-size: 24px;
+      @include mq('tablet') {
+        width: 100%;
+      }
+    }
+  }
+  &-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 42px;
+    width: 80%;
+    max-width: 256px;
+    height: 44px;
+    background-color: $color-white;
+    box-shadow: 4px 4px 16px rgba(39, 39, 39, 0.25),
+      inset -4px -4px 16px rgba(39, 39, 39, 0.1),
+      inset 4px 4px 16px rgba(39, 39, 39, 0.07);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-black;
+    cursor: pointer;
+  }
+}
+
+.todo-list {
+  &-date {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-bottom: 18px;
+    margin-top: 42px;
+  }
+  &-items {
+    width: 100%;
+    max-width: 720px;
+    height: 44px;
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-white;
+    flex-grow: 1;
+    .task-text {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      width: 200px;
+      padding: 10px;
+      height: 44px;
+      border: 1px solid $color-black;
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:focus {
+        border: 1px solid #272727;
+        box-shadow: inset -4px -4px 16px rgba(39, 39, 39, 0.15),
+          inset 4px 4px 16px rgba(39, 39, 39, 0.15);
+      }
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgba($coplor-grey, 0.5);
+  display: none;
+  transition: display 0.3s ease-in-out;
+  &.show-modal {
+    display: grid;
+  }
+}
+
+.add-task {
+  &-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-white;
+    z-index: 999;
+    @include mq('tablet') {
+      position: unset;
+      top: unset;
+      left: unset;
+      max-width: 753px;
+      height: 276px;
+    }
+  }
+
+  &-input-group {
+    display: flex;
+    flex-direction: column;
+    @include mq('tablet') {
+      flex-direction: row;
+    }
+    label {
+      width: 55px;
+      margin-right: 12px;
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding: 10px;
+    row-gap: 50px;
+    @include mq('tablet') {
+      row-gap: 32px;
+      padding: 40px;
+    }
+    .title {
+      height: 44px;
+      @include mq('tablet') {
+        width: 600px;
+      }
+      input {
+        flex-grow: 1;
+        border-radius: 2px;
+        font-size: 24px;
+      }
+    }
+
+    input {
+      background-color: $color-back;
+      border: 1px solid $color-black;
+      height: 44px;
+      padding: 10px;
+    }
+  }
+  &-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+    @include mq('tablet') {
+      column-gap: 48px;
+    }
+    button {
+      color: $color-white;
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 58px;
+      box-shadow: 4px 4px 16px rgba(39, 39, 39, 0.1);
+      border-radius: 4px;
+      height: 44px;
+      background-color: rgba($coplor-grey, 0.5);
+      @include mq('tablet') {
+        width: 200px;
+      }
+    }
+  }
+}
